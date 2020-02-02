@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
+import { CardList } from './components/card-list/card-list.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      terms: [],
+      resources: []
+    }
+  }
+
+  componentDidMount() {
+    fetch('https://cors-anywhere.herokuapp.com/https://sandbox.tinypass.com/api/v3/publisher/term/list?aid=eBGQWilSFK&api_token=lVgfKJRNHusQp6f4iWf6000UePfs2b5iyg0dzBMm')
+    .then(response => response.json())
+    .then(data => this.setState({ terms: data.terms}));
+  }
+
+  render() {
+    return(
+     <div className='App'>
+       <CardList terms={this.state.terms}/>
+     </div>
+    );
+  }
 }
 
 export default App;
