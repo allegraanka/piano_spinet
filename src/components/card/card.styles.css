@@ -12,7 +12,7 @@
     transform: translateZ(0);
     transition: transform 0.25s ease-out;
     width: 450px;
-    margin: 0 1% 1% 1%;
+    margin: 0 auto 1%;
 }
 
 .card-container:hover {
